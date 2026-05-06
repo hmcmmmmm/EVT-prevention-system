@@ -4,7 +4,6 @@ import authRoutes from './routes/auth';
 import patientRoutes from './routes/patients';
 import assessmentRoutes from './routes/assessments';
 import statsRoutes from './routes/stats';
-import followupRoutes from './routes/followup';
 import userRoutes from './routes/users';
 
 const app = express();
@@ -17,7 +16,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
 app.use('/api/assessments', assessmentRoutes);
 app.use('/api/stats', statsRoutes);
-app.use('/api/followup', followupRoutes);
 app.use('/api/users', userRoutes);
 
 app.get('/api/health', (_req, res) => {

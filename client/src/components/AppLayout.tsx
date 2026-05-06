@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu, Dropdown, Avatar, Space, Typography, Tag } from 'antd';
 import {
   DashboardOutlined, TeamOutlined, AlertOutlined, BarChartOutlined,
-  UserOutlined, LogoutOutlined, MedicineBoxOutlined, PhoneOutlined,
+  UserOutlined, LogoutOutlined, MedicineBoxOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
@@ -28,13 +28,14 @@ const AppLayout: React.FC = () => {
   const menuItems = [
     { key: '/', icon: <DashboardOutlined />, label: '监控仪表盘' },
     { key: '/patients', icon: <TeamOutlined />, label: '患者管理' },
-    { key: '/alerts', icon: <AlertOutlined />, label: '预警中心' },
   ];
 
   if (permissions?.canViewStats) {
     menuItems.push({ key: '/stats', icon: <BarChartOutlined />, label: '质控统计' });
   }
-  menuItems.push({ key: '/followup', icon: <PhoneOutlined />, label: '随访管理' });
+  
+  menuItems.push({ key: '/alerts', icon: <AlertOutlined />, label: '预警中心' });
+
   if (permissions?.canManageUsers) {
     menuItems.push({ key: '/users', icon: <SettingOutlined />, label: '用户管理' });
   }

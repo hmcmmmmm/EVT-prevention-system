@@ -61,16 +61,6 @@ export const statsApi = {
   getDepartments: () => api.get('/stats/departments'),
 };
 
-export const followupApi = {
-  getList: (status?: string) =>
-    api.get('/followup', { params: { status } }),
-  getStats: () => api.get('/followup/stats'),
-  getByPatient: (patientId: string) =>
-    api.get(`/followup/patient/${patientId}`),
-  complete: (id: string, data: any) =>
-    api.patch(`/followup/${id}/complete`, data),
-};
-
 export const userApi = {
   getList: () => api.get('/users'),
   toggleActive: (id: string) => api.patch(`/users/${id}/toggle`),

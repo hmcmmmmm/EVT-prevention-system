@@ -11,7 +11,6 @@ import PatientDetailPage from './pages/PatientDetailPage';
 import AlertsPage from './pages/AlertsPage';
 import StatsPage from './pages/StatsPage';
 import AssessmentFormPage from './pages/AssessmentFormPage';
-import FollowupPage from './pages/FollowupPage';
 import UserManagementPage from './pages/UserManagementPage';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -46,7 +45,6 @@ const App: React.FC = () => {
               <Route path="/patients/:id/assess" element={<AssessmentFormPage />} />
               <Route path="/alerts" element={<AlertsPage />} />
               <Route path="/stats" element={<StatsPage />} />
-              <Route path="/followup" element={<FollowupPage />} />
               <Route path="/users" element={<UserManagementPage />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
