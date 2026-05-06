@@ -62,20 +62,29 @@ export class MockHisDataSource implements IHisDataSource {
   }
 }
 
+import { RealHisDataSource } from './real-his-datasource';
+
 /** 全局单例 — 对接时替换 MockHisDataSource 为真实实现 */
 let dataSourceInstance: IHisDataSource | null = null;
 
 export function getHisDataSource(): IHisDataSource {
   if (!dataSourceInstance) {
-    dataSourceInstance = new MockHisDataSource();
-    // 对接时:
-    // dataSourceInstance = new RealHisDataSource({
-    //   host: process.env.HIS_DB_HOST || 'localhost',
-    //   port: parseInt(process.env.HIS_DB_PORT || '1521'),
-    //   database: process.env.HIS_DB_NAME || 'HIS',
-    //   username: process.env.HIS_DB_USER || '',
-    //   password: process.env.HIS_DB_PASS || '',
-    // });
+    // 通过环境变量判断是否使用真实的 HIS 数据源
+    const useRealHis = process.env.USE_REAL_HIS === 'true';
+    
+    if (useRealHis) {
+      console.log('正在连接真实的 HIS 数据库...');
+      dataSourceInstance = new RealHisDataSource({
+        host: process.env.HIS_DB_HOST || 'localhost',
+        port: parseInt(process.env.HIS_DB_PORT || '3306'),
+        database: process.env.HIS_DB_NAME || 'HIS',
+        user: process.env.HIS_DB_USER || 'root',
+        password: process.env.HIS_DB_PASS || '',
+      });
+    } else {
+      console.log('使用模拟的 HIS 数据源 (Mock Data)...');
+      dataSourceInstance = new MockHisDataSource();
+    }
   }
   return dataSourceInstance;
 }
