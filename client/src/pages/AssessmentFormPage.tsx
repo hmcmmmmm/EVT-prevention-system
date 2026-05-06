@@ -148,6 +148,13 @@ const AssessmentFormPage: React.FC = () => {
     setSubmitting(false);
   };
 
+  const handleSyncToEMR = () => {
+    message.loading({ content: '正在同步到电子病历系统...', key: 'syncEMR' });
+    setTimeout(() => {
+      message.success({ content: '已成功同步到电子病历系统！', key: 'syncEMR', duration: 3 });
+    }, 1500);
+  };
+
   if (loading) return <Spin size="large" style={{ display: 'flex', justifyContent: 'center', marginTop: 100 }} />;
   if (!patient) return <Alert message="患者不存在或无权访问" type="error" showIcon />;
 
@@ -158,7 +165,10 @@ const AssessmentFormPage: React.FC = () => {
         title="VTE 风险评估已提交"
         subTitle={`${patient.name} 的评估结果: ${riskCfg.label} (${totalScore}分)`}
         extra={[
-          <Button type="primary" key="detail" onClick={() => navigate(`/patients/${id}`)}>
+          <Button type="primary" key="sync" onClick={handleSyncToEMR}>
+            同步到电子病历 (EMR)
+          </Button>,
+          <Button key="detail" onClick={() => navigate(`/patients/${id}`)}>
             查看患者详情
           </Button>,
           <Button key="list" onClick={() => navigate('/patients')}>

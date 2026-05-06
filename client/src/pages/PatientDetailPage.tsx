@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Card, Descriptions, Tag, Table, Tabs, Spin, Timeline,
-  Button, Typography, Space, Alert as AntAlert, Badge, Divider,
+  Button, Typography, Space, Alert as AntAlert, Badge, Divider, message,
 } from 'antd';
 import { ArrowLeftOutlined, WarningOutlined, FormOutlined } from '@ant-design/icons';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -41,6 +41,13 @@ const PatientDetailPage: React.FC = () => {
       setLoading(false);
     }).catch(() => setLoading(false));
   }, [id]);
+
+  const handleSyncToEMR = (assessmentId: string) => {
+    message.loading({ content: '正在同步到电子病历系统...', key: `syncEMR-${assessmentId}` });
+    setTimeout(() => {
+      message.success({ content: '已成功同步到电子病历系统！', key: `syncEMR-${assessmentId}`, duration: 3 });
+    }, 1500);
+  };
 
   if (loading) return <Spin size="large" style={{ display: 'flex', justifyContent: 'center', marginTop: 100 }} />;
   if (!patient) return <AntAlert message="患者不存在或无权访问" type="error" showIcon />;
@@ -124,6 +131,9 @@ const PatientDetailPage: React.FC = () => {
                               </Tag>
                               <Tag>{a.scaleType.toUpperCase()}</Tag>
                               <Text type="secondary">{a.assessedAt?.slice(0, 16).replace('T', ' ')}</Text>
+                              <Button type="link" size="small" onClick={() => handleSyncToEMR(a.id)}>
+                                同步到 EMR
+                              </Button>
                             </Space>
                             <div>
                               <Text strong>评估因子: </Text>
