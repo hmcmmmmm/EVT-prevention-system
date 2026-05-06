@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  vte-system:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: vte-prevention-system:1.0
+    container_name: vte_app
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - JWT_SECRET=change_this_to_a_secure_random_string_in_production
+      # - HIS_DB_HOST=192.168.1.100
+      # - HIS_DB_PORT=1521
+      # - HIS_DB_NAME=HIS
+      # - HIS_DB_USER=vte_sync
+      # - HIS_DB_PASS=password

@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 未评估患者行高亮 */
+.row-unassessed {
+  background-color: #fff7e6 !important;
+}
+
+/* 高危行 */
+.row-high {
+  background-color: #fff1f0 !important;
+}
+
+/* 极高危行 */
+.row-very-high {
+  background-color: #ffccc7 !important;
+}
+
+/* 紧急预警行 */
+.row-red-alert {
+  background-color: #fff1f0 !important;
+}
+
+/* 异常检验值 */
+.row-abnormal {
+  background-color: #fff2e8 !important;
+}
+
+/* 禁用用户行 */
+.row-inactive {
+  opacity: 0.5;
+  background-color: #fafafa !important;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
